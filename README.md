@@ -17,3 +17,9 @@ that combines all modes of transport available to the customer.
 While also presenting cheaper (and slower) routes, and more 
 expensive (may not be faster in rush hour but possibly likely more 
 comfortable) options. 
+
+The data being used in this project comes from two separate sources,
+
+    Google Maps API - https://developers.google.com/maps/documentation/directions/intro
+
+    Lyft Developer API - https://developer.lyft.com/docs
