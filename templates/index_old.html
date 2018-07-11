@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quick Commute</title>
+    <link
+        href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.7.min.css"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.7.min.css"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.7.min.css"
+        rel="stylesheet" type="text/css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet type=text/css href='{{ url_for('static',filename='default.css')}}'>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Create two unequal columns that floats next to each other */
+    .column {
+        float: left;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+    }
+
+    .left {
+      width: 25%;
+    }
+
+    .right {
+      width: 75%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    </style>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="#home">Home</a>
+<!--  <a href="https://github.com/abhijithrajan/flask-framework">Github</a>  -->
+  <a href="/about">About</a>
+</div>
+
+<body>
+  <div style="padding-left:16px">
+    <h2>Quick Commute - A better way to travel</h2>
+
+
+    <div class="row">
+      <div class="column" style="background-color:#ffffff;">
+       <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-left">
+              <form id='input' method='post' action='/'>  
+              <p>Origin Address: <input type='text' name='origin' placeholder='Journal Square, Jersey City, NJ' size="35" /></p>
+              <p>Destination Address: <input type='text' name='dest' placeholder='Laguardia, NY, NY' size="35"/></p>
+              <p>Max Cost (in $): <input type='text' name='costcap' size="5" /></p>
+              <p>Max time (in min): <input type='text' name='timecap' size="5" /></p>
+
+              <p>
+              <!-- Rounded switch -->
+              <label class="switch">
+                <input type="checkbox" name='features' checked>
+                <span class="slider round"></span>
+              </label> Include Lyft
+              </p>
+
+              <p>
+              <label class="switch">
+                <input type="checkbox" name='features' checked>
+                <span class="slider round"></span>
+              </label> Include Transit (train/bus)
+              </p>
+              <p><input type="submit" value="Submit"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column" style="background-color:#ffffff;">
+        {{ the_div|safe }}
+        <script src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.7.min.js"></script>
+        <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.7.min.js"></script>
+        <script src="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.7.min.js"></script>
+        {{ the_script|safe }}
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

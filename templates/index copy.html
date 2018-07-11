@@ -1,0 +1,291 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Quik Commute
+{% endblock %}
+
+{% block content %}
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>Getting you there, quick!</title>
+
+		<!-- Mobile Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="images/favicon.ico">
+
+		<!-- Web Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+
+		<!-- Bootstrap core CSS -->
+		<link href="../static/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+		<!-- Font Awesome CSS -->
+		<link href="../static/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+		<!-- Plugins -->
+		<link href="../static/css/animations.css" rel="stylesheet">
+
+		<!-- Worthy core CSS file -->
+		<link href="../static/css/style.css" rel="stylesheet">
+
+		<!-- Custom css --> 
+		<link href="../static/css/custom.css" rel="stylesheet">
+
+        <!--for google maps-->
+		<style type="text/css">
+        #map { height: 360px; width: 100%}
+        #floating-panel {
+                        position: absolute;
+                        top: 10px;
+                        left: 25%;
+                        z-index: 5;
+                        background-color: #fff;
+                        padding: 5px;
+                        border: 1px solid #999;
+                        text-align: center;
+                        font-family: 'Helvetica','sans-serif';
+                        line-height: 20px;
+                        padding-left: 10px;
+						}
+        #floating-panel {
+                        background-color: #fff;
+                        border: 0px solid #999;
+                        left: 25%;
+                        padding: 5px;
+                        position: absolute;
+                        top: 10px;
+                        z-index: 5;
+      					}
+        </style>
+	</head>
+
+	<body class="no-trans">
+		<!-- scrollToTop -->
+		<!-- ================ -->
+		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
+
+		<!-- header start -->
+		<!-- ================ -->
+		<header class="header fixed navbar navbar-fixed-top">
+			<div class="container">
+				<div class="row">
+					<div id="top" class="col-md-5">
+
+						<!-- header-left start -->
+						<!-- ================ -->
+						<div class="header-left clearfix">
+							<!-- name-and-slogan -->
+							<div class="site-name-and-slogan smooth-scroll">
+								<div class="site-name"><a href="#banner">Quick Commute</a></div>
+								<div class="site-slogan">Travel Map </div>
+							</div>
+
+						</div>
+						<!-- header-left end -->
+					</div>
+					<div class="col-md-7">
+
+						<!-- header-right start -->
+						<!-- ================ -->
+						<div class="header-right clearfix">
+
+							<!-- main-navigation start -->
+							<!-- ================ -->
+							<div class="main-navigation animated">
+
+								<!-- navbar start -->
+								<!-- ================ -->
+								<nav class="navbar navbar-default" role="navigation">
+									<div class="container-fluid">
+
+										<!-- Toggle get grouped for better mobile display -->
+										<div class="navbar-header">
+											<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+												<span class="sr-only">Toggle navigation</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+										</div>
+
+										<!-- Collect the nav links, forms, and other content for toggling -->
+										<div class="collapse navbar-collapse scrollspy smooth-scroll" id="navbar-collapse-1">
+											<ul class="nav navbar-nav navbar-right">
+												<li class="active"><a href="#top">Home</a></li>
+												<li><a href="#recommendation">Where to go?</a></li>
+												<li><a href="#howitworks">How it works?</a></li>
+											</ul>
+										</div>
+
+									</div>
+								</nav>
+								<!-- navbar end -->
+
+							</div>
+							<!-- main-navigation end -->
+
+						</div>
+						<!-- header-right end -->
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- header end -->
+        <!-- banner start -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1>You do not know where to visit in Florida?</h1>
+                <p class="lead text-left">
+                	Let us help you with some personalized recommendations!
+				</p>
+            </div>
+        </div>
+		<!-- ================ -->
+		<!-- header end -->
+        <!--recommendation section start-->
+        <div class="section clearfix object-non-visible" data-animation-effect="fadeIn">
+			<div class="container">
+                <div class="row centered">
+                    <div id="recommendation"></div>
+                    <div class="col-md-12" data-animation-effect="fadein">
+                        <div id="recommendation"></div>
+                        <h1>
+                            Get your personalized recommendations.
+                        </h1>
+                        <p class="lead text-left">
+                            Use the slide bars to assign relative weights to following factors.
+						</p>
+                    </div>
+                </div>
+				<div class="row">
+					<div class="col-md-8" data-animation-effect="fadeIn">
+                        <div class="container">
+                        <iframe width="70%" height="500" src={{ out_map }}> </iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-1" data-animation-effect="fadeIn">
+                    </div>
+                    <form id='index' method='POST' action='/#recommendation'>
+                    <div class="col-md-3" data-animation-effect="fadeIn">
+                        {{ wtf.quick_form(form)}}
+                        <input class="btn btn-primary" type="submit" value="Access Data">
+                    </div>
+                    </form>
+                    </div>
+				</div>
+            </div>
+        </div>
+        <div class="section clearfix object-non-visible" data-animation-effect="fadeIn">
+            <div id="howitworks"></div>
+			<!--<div class="container">-->
+                <!--<div class="row-md-12"><h1>How it works</h1></div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-6">-->
+                        <!--<h2 class="text text-left" align="left">Step 1: collect, clean, and geocode data</h2>-->
+                        <!--<p class="lead text-left" align="left">-->
+                            <!--We begin by collecting raw datasets from a variety of sources such as <a href="http://www.socrata.com">Socrata</a>, <a href="http://www.Yelp.com">Yelp</a>, and the <a href="http://www.nps.gov/index.htm">National Parks Service</a>.-->
+                            <!--<br><br>-->
+                            <!--Individual datasets can be visualized on a map as shown to the right (below, on mobile), but plotting multiple maps at once doesn't yield much visual insight.-->
+                        <!--</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-6 centered" data-animation-effect="fadeIn">-->
+                        <!--<br>-->
+							<!--<iframe width="100%" height="360" frameborder="0" src="https://dvdwllc.cartodb.com/viz/5199023e-b948-11e5-9060-0e31c9be1b51/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>-->
+                        <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row object-non-visible" data-animation-effect="fadeIn">-->
+                    <!--<div class="col-md-6">-->
+                        <!--<h2 class="text text-left" align="left">Step 2: approximate the density of each dataset</h2>-->
+                        <!--<p class="lead text-left" align="left">-->
+                            <!--Rather than plotting all of the points in a dataset, we can visualize each dataset's density using a technique known as <b>kernel density estimation</b>.-->
+                        <!--</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3 centered" data-animation-effect="fadeIn">-->
+                        <!--<br>-->
+                        <!--<img class="center-block" src="static/images/data_crop.png" width="360" height="100%">-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-3 centered" data-animation-effect="fadeIn">-->
+                        <!--<br>-->
+                        <!--<img class="center-block" src="static/images/KDE.png" width="360" height="100%">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row object-non-visible" data-animation-effect="fadeIn">-->
+                    <!--<div class="col-md-8">-->
+                        <!--<h2 class="text text-left" align="left">Step 3: combine weighted density estimates</h2>-->
+                        <!--<p class="lead text-left" align="left">-->
+                            <!--When a user enters their preferences and clicks 'submit', the server computes the sum of the weighted density maps and returns latitude and longitude coordinates corresponding to areas with the highest overall density.-->
+                        <!--</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-4 centered" data-animation-effect="fadeIn">-->
+                        <!--<br>-->
+                        <!--<img class="center-block" src="static/images/all_maps_crop.png" width="300" height="100%">-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="section clearfix object-non-visible" data-animation-effect="fadeIn">
+			<!--<div class="container">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12" data-animation-effect="fadeIn">-->
+                        <!--<h2 class="text text-left" align="left">What's next?</h2>-->
+                        <!--<p class="lead text-left" align="left">-->
+                            <!--We're working on applying unsupervised machine learning algorithms, such as K-means clustering, in order to uncover hidden neighborhood dynamics and relationships. Check out <a href="../static/clusters.html">this page</a> to see some of the progress we've made.-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+
+		<!-- footer start -->
+		<!-- ================ -->
+
+
+		<!-- footer end -->
+        <div class="subfooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 centered">
+                        <h2>
+                            <a target="_blank" href="https://github.com/MiladHooshyar/"><i class="fa fa-github"></i></a>
+                            <a href="milad.hooshyar@ucf.edu"><i class="fa fa-envelope"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/milad-hooshyar-83289279"><i class="fa fa-linkedin"></i></a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- JavaScript files placed at the end of the document so the pages load faster
+		================================================== -->
+		<!-- Jquery and Bootstap core js files -->
+		<script type="text/javascript" src="../static/plugins/jquery.min.js"></script>
+		<script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Modernizr javascript -->
+		<script type="text/javascript" src="../static/plugins/modernizr.js"></script>
+
+		<!-- Isotope javascript -->
+		<script type="text/javascript" src="../static/plugins/isotope/isotope.pkgd.min.js"></script>
+
+		<!-- Backstretch javascript -->
+		<script type="text/javascript" src="../static/plugins/jquery.backstretch.min.js"></script>
+
+		<!-- Appear javascript -->
+		<script type="text/javascript" src="../static/plugins/jquery.appear.js"></script>
+
+		<!-- Initialization of Plugins -->
+		<script type="text/javascript" src="../static/js/template.js"></script>
+
+		<!-- Custom Scripts -->
+		<script type="text/javascript" src="../static/js/custom.js"></script>
+
+	</body>
+{% endblock %}
