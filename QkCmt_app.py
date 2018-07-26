@@ -15,18 +15,10 @@ import os
 import re
 import requests
 import pandas as pd
-import numpy as np
 import json
-from collections import defaultdict
 
-from geopy import distance
 import networkx as nx
 import folium
-
-from bokeh.plotting import figure
-from bokeh.models import ColumnDataSource, HoverTool, GMapOptions
-from bokeh.plotting import gmap
-from bokeh.embed import components
 #===========================================================================================
 
 app = Flask(__name__, static_url_path = "", static_folder = "static")
@@ -77,12 +69,9 @@ def index():
 
         olat, olong = goog_loc['routes'][0]['legs'][0]['start_location']['lat'], goog_loc['routes'][0]['legs'][0]['start_location']['lng']
         geoid = get_tract_num(olat, olong)
-
         income = get_income(geoid, gender, education)
-        print(geoid, income)
 
         graph, shortest = get_best_route(goog_loc, lyft_token, income)
-
         make_plot(shortest, graph)
 
         instr_text = ["Ride option for income = $" + str(int(income))]        
@@ -122,7 +111,7 @@ def get_income(geoid, gender, education):
         return income.values[0]
     else: 
         return 50000
-        
+
 #===========================================================================================
 def get_best_route(locator, token, income_per_year):
 
