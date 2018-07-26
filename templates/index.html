@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Let's get you there!</title>
+		<title>Fast and efficient travel</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="css/main.css" rel="stylesheet">
@@ -42,14 +42,31 @@
 						<section id="directions"> 
 							<div class="gallery">
 								<header class="special">
-                                    <h3>Where do you want to go?</h3>										
+                                    <h3>Where do you want to go?</h3>							
 								</header> 
                                 <section class="columns double">
                                     <div class="column">
                                         <form id='input' method='post' action='/'>  
                                             <p>Origin Address: <input type='text' name='origin' placeholder='Journal Square, Jersey City, NJ' size="35" /></p>
                                             <p>Destination Address: <input type='text' name='dest' placeholder='Laguardia, NY, NY' size="35"/></p>
-                                            <p>Annual Income (in $): <input type='text' name='income' placeholder='50000' size="5" /></p>
+                                            <!-- Income 
+                                            <p>Annual Income (in $): <input type='text' name='income' placeholder='50000' size="5" /></p> -->
+                                            <p> Please select your gender
+                                            <select name="gender-select">
+												<option value="Female">Female</option>
+												<option value="Male">Male</option>
+											</select>  </p>
+
+                                            <p> Please select your education level
+                                            <select name="education-select">
+												<option value="LHS"> Less than high school </option>
+												<option value="HS"> High school (includes equivalency) </option>
+												<option value="College"> Some college or associate's degree </option>
+												<option value="Bachelors"> Bachelor's degree </option>
+												<option value="Graduate"> Graduate or professional degree </option>
+											</select>
+											 </p>
+
                                             <p><input type="submit" value="Submit"></p>
                                         </form>
                                     </div>

@@ -37,11 +37,14 @@ def index():
     goog_api_key = os.environ.get('GOOG_API_KEY')
 
     if request.method == 'GET':
-        def_map_lat, def_map_lng = 40.745, -73.97
+        def_map_lat, def_map_lng = 40.7128, -74.0060
 #        map_options = GMapOptions(lat=def_map_lat, lng=def_map_lng, map_type="roadmap", zoom=11)
 #        p = gmap(goog_api_key, map_options)
 #        script, div = components(p)
+
         map_osm = folium.Map(location=[def_map_lat, def_map_lng])
+        map_osm.choropleth(geo_data="BoroughBoundaries.geojson",
+                   fill_opacity=0.5, line_opacity=0.2)#,fill_color='YlGn') 
         map_osm.save('templates/map_init.html')
 
         return render_template('index.html')
@@ -57,19 +60,32 @@ def index():
         if not re.match(addr_pattern, destination):
             return render_template("error.html", errors="re-enter destination address")
 
+        '''
         try:
             income = float(request.form['income'])
         except ValueError:
             return render_template("error.html", errors="re-enter income. Only numbers allowed.")
+        '''
+
+        lyft_token = lyft_init()
+
+        gender = request.form['gender-select']
+        education = request.form['education-select']
+
 
         goog_loc = google_init(origin, destination, goog_api_key)
-        lyft_token = lyft_init()
+
+        olat, olong = goog_loc['routes'][0]['legs'][0]['start_location']['lat'], goog_loc['routes'][0]['legs'][0]['start_location']['lng']
+        geoid = get_tract_num(olat, olong)
+
+        income = get_income(geoid, gender, education)
+        print(geoid, income)
 
         graph, shortest = get_best_route(goog_loc, lyft_token, income)
 
         make_plot(shortest, graph)
 
-        instr_text = []
+        instr_text = ["Ride option for income = $" + str(int(income))]        
         for cnt in range(len(shortest)-1):
             instr_text.append( str(cnt) + ". " + graph.get_edge_data(shortest[cnt],shortest[cnt+1])[0]['instructions'] )
 
@@ -85,6 +101,28 @@ def get_map_init():
 def get_map_final():
     return render_template('map_final.html')
 
+#===========================================================================================
+def get_income(geoid, gender, education):
+
+    inc_sex_edu = pd.read_csv("/Users/arajan/Downloads/ACS_16_5YR_B20004/ACS_16_5YR_B20004_with_ann_NYC.csv", header=0, index_col=0)
+    for col in inc_sex_edu.columns:
+        if not 'Geography' in col:
+            inc_sex_edu[col] = pd.to_numeric(inc_sex_edu[col], errors='coerce') 
+    inc_sex_edu.drop(['Geography','Total_Male','Total_Female'],axis=1, inplace=True)
+    inc_sex_edu.dropna(how='all', thresh=5, inplace=True)
+
+    inc_sex_edu.iloc[:,0:5] = inc_sex_edu.iloc[:,0:5].T.interpolate().T
+    inc_sex_edu.iloc[:,0:5] = inc_sex_edu.iloc[:,0:5].iloc[:, ::-1].T.interpolate().T.iloc[:, ::-1]
+    inc_sex_edu.iloc[:,5:] = inc_sex_edu.iloc[:,5:].T.interpolate().T
+    inc_sex_edu.iloc[:,5:] = inc_sex_edu.iloc[:,5:].iloc[:, ::-1].T.interpolate().T.iloc[:, ::-1]
+
+    income = inc_sex_edu.loc[inc_sex_edu.index==geoid, gender+'_'+education]
+    
+    if income.values:
+        return income.values[0]
+    else: 
+        return 50000
+        
 #===========================================================================================
 def get_best_route(locator, token, income_per_year):
 
@@ -219,6 +257,15 @@ def get_best_route(locator, token, income_per_year):
     return G, shortest
 
 #===========================================================================================
+def get_tract_num(olat, olong):
+    url = "https://geocoding.geo.census.gov/geocoder/geographies/coordinates"
+    params = {'x': olong, 'y': olat,
+            'benchmark':4,'vintage':4,'format':'json'}
+    r = requests.get(url, params=params)
+
+    return int(r.json()['result']['geographies']['Census Tracts'][0]['GEOID'])
+
+#===========================================================================================
 def google_init(origin,dest, api_key):
     url = 'https://maps.googleapis.com/maps/api/directions/json'
     pars = {'origin':origin,'destination':dest,'mode':'transit','key':api_key}
@@ -293,6 +340,11 @@ def make_plot(short, G):
     folium.Marker([lats[short[-1]], longs[short[-1]]]).add_to(my_map)
 
     #fadd lines
+    for point in points:
+        folium.RegularPolygonMarker(point,
+            fill_color='#132b5e',
+            number_of_sides=10,
+            radius=5).add_to(my_map)
     folium.PolyLine(points, color="black", weight=5, opacity=1).add_to(my_map)
     my_map.save('templates/map_final.html')
 

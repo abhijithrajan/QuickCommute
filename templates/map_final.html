@@ -15,7 +15,7 @@
     <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
     <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
     
-            <style> #map_c17d89a5e56a4addbc2adbaa94180604 {
+            <style> #map_e7489fd46faa4cb6abb322dc41cea60b {
                 position : relative;
                 width : 100.0%;
                 height: 100.0%;
@@ -24,10 +24,11 @@
                 }
             </style>
         
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-dvf/0.3.0/leaflet-dvf.markers.min.js"></script>
 </head>
 <body>    
     
-            <div class="folium-map" id="map_c17d89a5e56a4addbc2adbaa94180604" ></div>
+            <div class="folium-map" id="map_e7489fd46faa4cb6abb322dc41cea60b" ></div>
         
 </body>
 <script>    
@@ -37,9 +38,9 @@
                 var bounds = null;
             
 
-            var map_c17d89a5e56a4addbc2adbaa94180604 = L.map(
-                                  'map_c17d89a5e56a4addbc2adbaa94180604',
-                                  {center: [40.74564576666666,-73.97902800000001],
+            var map_e7489fd46faa4cb6abb322dc41cea60b = L.map(
+                                  'map_e7489fd46faa4cb6abb322dc41cea60b',
+                                  {center: [40.713376600000004,-73.92790445714286],
                                   zoom: 11,
                                   maxBounds: bounds,
                                   layers: [],
@@ -49,7 +50,7 @@
             
         
     
-            var tile_layer_72621c831fdf426586208f10b4227d05 = L.tileLayer(
+            var tile_layer_65a47957892f45238abfb41d179b957c = L.tileLayer(
                 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 {
   "attribution": null,
@@ -59,31 +60,150 @@
   "noWrap": false,
   "subdomains": "abc"
 }
-                ).addTo(map_c17d89a5e56a4addbc2adbaa94180604);
+                ).addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
         
     
 
-            var marker_58dde0fc3eb1472cbae329829d208d22 = L.marker(
-                [40.7345716,-74.0631544],
+            var marker_77dc492188714311af8889e444d70274 = L.marker(
+                [40.5976176,-73.9533178],
                 {
                     icon: new L.Icon.Default()
                     }
                 )
-                .addTo(map_c17d89a5e56a4addbc2adbaa94180604);
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
             
     
 
-            var marker_975ef2fe5fd04efb8b983e92f7516b14 = L.marker(
+            var marker_6de879547e224a9bad42db9b5bf068ea = L.marker(
                 [40.77430260000001,-73.87183639999999],
                 {
                     icon: new L.Icon.Default()
                     }
                 )
-                .addTo(map_c17d89a5e56a4addbc2adbaa94180604);
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
             
     
-                var poly_line_3018e87f9d4a4a50b6e1c3433f6cb7d0 = L.polyline(
-                    [[40.7345716, -74.0631544], [40.7326829, -74.0626888], [40.7427731, -73.992594], [40.7429014, -73.99255939999999], [40.746643, -73.891335], [40.77430260000001, -73.87183639999999]],
+            var regular_polygon_marker_412815fbef924cf7b6b8e96b0d6c8e4c = new L.RegularPolygonMarker(
+                new L.LatLng(40.5976176,-73.9533178),
+                {
+                    icon : new L.Icon.Default(),
+                    color: 'black',
+                    opacity: 1,
+                    weight: 2,
+                    fillColor: '#132b5e',
+                    fillOpacity: 1,
+                    numberOfSides: 10,
+                    rotation: 0,
+                    radius: 5
+                    }
+                )
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
+            
+    
+            var regular_polygon_marker_e74afa98d28645c696ef2ce6f90ffc30 = new L.RegularPolygonMarker(
+                new L.LatLng(40.5993,-73.955933),
+                {
+                    icon : new L.Icon.Default(),
+                    color: 'black',
+                    opacity: 1,
+                    weight: 2,
+                    fillColor: '#132b5e',
+                    fillOpacity: 1,
+                    numberOfSides: 10,
+                    rotation: 0,
+                    radius: 5
+                    }
+                )
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
+            
+    
+            var regular_polygon_marker_1737b35c2c4149258175a2e6ffa2c3ee = new L.RegularPolygonMarker(
+                new L.LatLng(40.764629,-73.96611),
+                {
+                    icon : new L.Icon.Default(),
+                    color: 'black',
+                    opacity: 1,
+                    weight: 2,
+                    fillColor: '#132b5e',
+                    fillOpacity: 1,
+                    numberOfSides: 10,
+                    rotation: 0,
+                    radius: 5
+                    }
+                )
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
+            
+    
+            var regular_polygon_marker_56dd64a4457e4f71a40cce2c80c99c3b = new L.RegularPolygonMarker(
+                new L.LatLng(40.764629,-73.96611),
+                {
+                    icon : new L.Icon.Default(),
+                    color: 'black',
+                    opacity: 1,
+                    weight: 2,
+                    fillColor: '#132b5e',
+                    fillOpacity: 1,
+                    numberOfSides: 10,
+                    rotation: 0,
+                    radius: 5
+                    }
+                )
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
+            
+    
+            var regular_polygon_marker_512bb83ea99545768ee281d55a2f4590 = new L.RegularPolygonMarker(
+                new L.LatLng(40.746643,-73.891335),
+                {
+                    icon : new L.Icon.Default(),
+                    color: 'black',
+                    opacity: 1,
+                    weight: 2,
+                    fillColor: '#132b5e',
+                    fillOpacity: 1,
+                    numberOfSides: 10,
+                    rotation: 0,
+                    radius: 5
+                    }
+                )
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
+            
+    
+            var regular_polygon_marker_ef38c80cc808432396c57f4e757782ba = new L.RegularPolygonMarker(
+                new L.LatLng(40.746515,-73.890689),
+                {
+                    icon : new L.Icon.Default(),
+                    color: 'black',
+                    opacity: 1,
+                    weight: 2,
+                    fillColor: '#132b5e',
+                    fillOpacity: 1,
+                    numberOfSides: 10,
+                    rotation: 0,
+                    radius: 5
+                    }
+                )
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
+            
+    
+            var regular_polygon_marker_4d2064b0fad848029d5ab72c17c3e542 = new L.RegularPolygonMarker(
+                new L.LatLng(40.77430260000001,-73.87183639999999),
+                {
+                    icon : new L.Icon.Default(),
+                    color: 'black',
+                    opacity: 1,
+                    weight: 2,
+                    fillColor: '#132b5e',
+                    fillOpacity: 1,
+                    numberOfSides: 10,
+                    rotation: 0,
+                    radius: 5
+                    }
+                )
+                .addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
+            
+    
+                var poly_line_f27d747cdce64d4ea874d7ab2a54dda7 = L.polyline(
+                    [[40.5976176, -73.9533178], [40.5993, -73.955933], [40.764629, -73.96611], [40.764629, -73.96611], [40.746643, -73.891335], [40.746515, -73.890689], [40.77430260000001, -73.87183639999999]],
                     {
   "bubblingMouseEvents": true,
   "color": "black",
@@ -100,6 +220,6 @@
   "smoothFactor": 1.0,
   "stroke": true,
   "weight": 5
-}).addTo(map_c17d89a5e56a4addbc2adbaa94180604);
+}).addTo(map_e7489fd46faa4cb6abb322dc41cea60b);
             
 </script>
